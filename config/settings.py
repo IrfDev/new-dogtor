@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "api"
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ DATABASES = {
         "USER": get_key(key_to_get="DB_USER", dotenv_path="./.env"),
         "PASSWORD": get_key(key_to_get="DB_PASSWORD", dotenv_path="./.env"),
         "HOST": "localhost",
-        "PORT": "",  # si lo dejas vacío tomara el puerto por default
+        "PORT": "", 
     }
 }
 
