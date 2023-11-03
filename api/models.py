@@ -3,6 +3,17 @@ from django.db import models
 # Create your models here.
 
 
+class Owner(models.Model):
+    """Owner object"""
+
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    phone = models.TextField(max_length=25)
+    email = models.EmailField()
+    address = models.CharField(max_length=25)
+    created_at = models.DateField(auto_now=True)
+
+
 class Pet(models.Model):
     """Pets object"""
 
@@ -18,18 +29,6 @@ class Pet(models.Model):
     created_at = models.DateField(auto_now=True)
     # When you include a string instead of the class
     # You'll lazy get the relationship
-    record = models.ForeignKey("Record", related_name="pets", on_delete=models.CASCADE)
-
-
-class Owner(models.Model):
-    """Owner object"""
-
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    phone = models.TextField(max_length=25)
-    email = models.EmailField()
-    address = models.CharField(max_length=25)
-    created_at = models.DateField(auto_now=True)
 
 
 class Record(models.Model):
@@ -44,4 +43,5 @@ class Record(models.Model):
 
     category = models.IntegerField(choices=Category.choices)
     procedure = models.CharField(max_length=255)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name="records")
     date = models.DateField()
