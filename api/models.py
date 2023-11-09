@@ -14,18 +14,19 @@ class Owner(models.Model):
     created_at = models.DateField(auto_now=True)
 
 
+class Species(models.Model):
+    """Pet species"""
+
+    name = models.CharField(max_length=20)
+
+
 class Pet(models.Model):
     """Pets object"""
-
-    class Species(models.IntegerChoices):
-        CAT = 1
-        DOG = 2
-        BIRD = 3
 
     name = models.CharField(max_length=255)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, related_name="pets")
     age = models.IntegerField()
-    species = models.IntegerField(choices=Species.choices)
+    species = models.ForeignKey(to=Species, on_delete=models.PROTECT)
     created_at = models.DateField(auto_now=True)
     # When you include a string instead of the class
     # You'll lazy get the relationship
