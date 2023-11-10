@@ -3,7 +3,19 @@
 # They're like web forms, they're going to validate date before send them to the database
 
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from api import models
+
+
+class UserModelSerializer(serializers.ModelSerializer):
+    """"""
+
+    class Meta:
+        model = User
+        fields = ("username", "password", "email")
+
+    def create(self, validated_data):
+        return self.Meta.model.objects.create_user(**validated_data)
 
 
 class OwnerModelSerializer(serializers.ModelSerializer):
